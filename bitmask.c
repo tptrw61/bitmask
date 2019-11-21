@@ -56,7 +56,7 @@ int BM_get(Bitmask *bm, int ix) {
 		lastError = BM_NULL_POINTER;
 		return BM_ERROR;
 	}
-	if (ix >= bm->size) {
+	if (ix >= bm->size || ix < 0) {
 		bm->lastError = BM_INDEX_OUT_OF_BOUNDS;
 		return BM_ERROR;
 	}
@@ -85,7 +85,7 @@ int BM_setTo(Bitmask *bm, int ix, int val) {
 		lastError = BM_NULL_POINTER;
 		return BM_ERROR;
 	}
-	if (ix >= bm->size) {
+	if (ix >= bm->size || ix < 0) {
 		bm->lastError = BM_INDEX_OUT_OF_BOUNDS;
 		return BM_ERROR;
 	}
@@ -108,7 +108,7 @@ int BM_toggle(Bitmask *bm, int ix) {
 		lastError = BM_NULL_POINTER;
 		return BM_ERROR;
 	}
-	if (ix >= bm->size) {
+	if (ix >= bm->size || ix < 0) {
 		bm->lastError = BM_INDEX_OUT_OF_BOUNDS;
 		return BM_ERROR;
 	}
