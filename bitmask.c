@@ -24,7 +24,7 @@ struct Bitmask {
 static int lastError = BM_OKAY;
 
 Bitmask * BM_create(int size) {
-	if (size <= 0) {
+	if (size < 0) {
 		lastError = BM_INVALID_SIZE;
 		return NULL;
 	}
@@ -34,12 +34,17 @@ Bitmask * BM_create(int size) {
 		return NULL;
 	}
 	bm->size = size;
-	bm->mask = (Mask*)malloc(sizeof(Mask) * ARR_SIZE(bm));
-	if (bm->mask == NULL) {
-		lastError = BM_BAD_MALLOC;
-		free(bm);
-		return NULL;
+	if (size == 0) {
+		bm->mask == NULL;
+	} else {
+		bm->mask = (Mask*)malloc(sizeof(Mask) * ARR_SIZE(bm));
+		if (bm->mask == NULL) {
+			lastError = BM_BAD_MALLOC;
+			free(bm);
+			return NULL;
+		}
 	}
+	bm->lastError = BM_OKAY;
 	BM_unsetAll(bm);
 	return bm;
 }
@@ -47,7 +52,8 @@ Bitmask * BM_create(int size) {
 void BM_destroy(Bitmask *bm) {
 	if (bm == NULL)
 		return;
-	free(bm->mask);
+	if (bm->mask != NULL)
+		free(bm->mask);
 	free(bm);
 }
 

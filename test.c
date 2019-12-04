@@ -22,7 +22,7 @@ char * writeInt(int x, int bits) {
 
 int main(void) {
 	Bitmask *bm;
-	bm = BM_create(0);
+	bm = BM_create(-1);
 	assert(bm == NULL);
 	assert(BM_lastError(0) == BM_INVALID_SIZE);
 	BM_clearError(0);
